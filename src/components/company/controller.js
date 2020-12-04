@@ -4,11 +4,7 @@ const companysController = {}
 companysController.getCompanys = async (req, res, next) => {
   try {
     const companys = await Companys.find()
-    res.json({
-      status: 200,
-      message: 'Companys listed',
-      body: companys
-    })
+    res.send(companys)
   } catch (error) {
     next(error)
   }
@@ -17,11 +13,7 @@ companysController.getCompanys = async (req, res, next) => {
 companysController.getOneCompany = async (req, res, next) => {
   try {
     const company = await Companys.findById(req.params.id)
-    res.json({
-      status: 200,
-      message: 'Company listed',
-      body: company
-    })
+    res.send(company)
   } catch (error) {
     next(error)
   }
@@ -38,11 +30,7 @@ companysController.postCompany = async (req, res, next) => {
       
     })
     await company.save()
-    res.json({
-      status: 201,
-      message: 'Company created',
-      body: company
-    })
+    res.send(company)
   } catch (error) {
     next(error)
   }
@@ -62,11 +50,7 @@ companysController.updateCompany = async (req, res, next) => {
       { $set: company },
       { omitUndefined: true, upsert: true }
     )
-    res.json({
-      status: 200,
-      message: `Company ${req.params.id} updated`,
-      body: company
-    })
+    res.send(company)
   } catch (error) {
     next(error)
   }
@@ -87,11 +71,7 @@ companysController.deleteCompany = async (req, res, next) => {
 companysController.getCompanyById = async (req, res, next) => {
   try {
     const company = await Companys.findById(req.companyId)
-    res.json({
-      state: 200,
-      message: 'Company with token listed',
-      body: company
-    })
+    res.send(company)
   } catch (error) {
     next(error)
   }

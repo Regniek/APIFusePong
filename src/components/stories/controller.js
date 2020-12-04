@@ -4,11 +4,7 @@ const storiesController = {}
 storiesController.getStories = async (req, res, next) => {
   try {
     const stories = await Stories.find()
-    res.json({
-      status: 200,
-      message: 'Stories listed',
-      body: stories
-    })
+    res.send(stories)
   } catch (error) {
     next(error)
   }
@@ -17,11 +13,7 @@ storiesController.getStories = async (req, res, next) => {
 storiesController.getOneStorie = async (req, res, next) => {
   try {
     const storie = await Stories.findById(req.params.id)
-    res.json({
-      status: 200,
-      message: 'Storie listed',
-      body: storie
-    })
+    res.send(storie)
   } catch (error) {
     next(error)
   }
@@ -35,11 +27,7 @@ storiesController.postStorie = async (req, res, next) => {
         project: req.body.project,      
     })
     await storie.save()
-    res.json({
-      status: 201,
-      message: 'Storie created',
-      body: storie
-    })
+    res.send(storie)
   } catch (error) {
     next(error)
   }
@@ -57,11 +45,7 @@ storiesController.updateStorie = async (req, res, next) => {
       { $set: storie },
       { omitUndefined: true, upsert: true }
     )   
-    res.json({
-      status: 200,
-      message: `Storie ${req.params.id} updated`,
-      body: storie
-    })
+    res.send(storie)
   } catch (error) {
     next(error)
   }
@@ -82,11 +66,7 @@ storiesController.deleteStorie = async (req, res, next) => {
 storiesController.getStorieById = async (req, res, next) => {
   try {
     const storie = await Stories.findById(req.storieId)
-    res.json({
-      state: 200,
-      message: 'Storie with token listed',
-      body: storie
-    })
+    res.send(storie)
   } catch (error) {
     next(error)
   }

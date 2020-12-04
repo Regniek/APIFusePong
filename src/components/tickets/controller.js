@@ -4,11 +4,7 @@ const ticketsController = {}
 ticketsController.getTickets = async (req, res, next) => {
   try {
     const tickets = await Tickets.find()
-    res.json({
-      status: 200,
-      message: 'Tickets listed',
-      body: tickets
-    })
+    res.send(tickets)
   } catch (error) {
     next(error)
   }
@@ -17,11 +13,7 @@ ticketsController.getTickets = async (req, res, next) => {
 ticketsController.getOneTicket = async (req, res, next) => {
   try {
     const ticket = await Tickets.findById(req.params.id)
-    res.json({
-      status: 200,
-      message: 'Ticket listed',
-      body: ticket
-    })
+    res.send(ticket)
   } catch (error) {
     next(error)
   }
@@ -36,11 +28,7 @@ ticketsController.postTicket = async (req, res, next) => {
         user: req.body.user,     
     })
     await ticket.save()
-    res.json({
-      status: 201,
-      message: 'Ticket created',
-      body: ticket
-    })
+    res.send(ticket)
   } catch (error) {
     next(error)
   }
@@ -59,11 +47,7 @@ ticketsController.updateTicket = async (req, res, next) => {
       { $set: ticket },
       { omitUndefined: true, upsert: true }
     )   
-    res.json({
-      status: 200,
-      message: `Ticket ${req.params.id} updated`,
-      body: ticket
-    })
+    res.send(ticket)
   } catch (error) {
     next(error)
   }
@@ -84,11 +68,7 @@ ticketsController.deleteTicket = async (req, res, next) => {
 ticketsController.getTicketById = async (req, res, next) => {
   try {
     const ticket = await Tickets.findById(req.ticketId)
-    res.json({
-      state: 200,
-      message: 'Ticket with token listed',
-      body: ticket
-    })
+    res.send(ticket)
   } catch (error) {
     next(error)
   }

@@ -5,11 +5,7 @@ const usersController = {}
 usersController.getUsers = async (req, res, next) => {
   try {
     const users = await Users.find().populate('Company');
-    res.json({
-      status: 200,
-      message: 'Users listed',
-      body: users
-    })
+    res.send(users)
   } catch (error) {
     next(error)
   }
@@ -18,11 +14,7 @@ usersController.getUsers = async (req, res, next) => {
 usersController.getOneUser = async (req, res, next) => {
   try {
     const user = await Users.findById(req.params.id)
-    res.json({
-      status: 200,
-      message: 'User listed',
-      body: user
-    })
+    res.send(user)
   } catch (error) {
     next(error)
   }
@@ -40,11 +32,7 @@ usersController.postUser = async (req, res, next) => {
       
     })
     await user.save()
-    res.json({
-      status: 201,
-      message: 'User created',
-      body: user
-    })
+    res.send(user)
   } catch (error) {
     next(error)
   }
@@ -65,11 +53,7 @@ usersController.updateUser = async (req, res, next) => {
       { $set: user },
       { omitUndefined: true, upsert: true }
     )
-    res.json({
-      status: 200,
-      message: `User ${req.params.id} updated`,
-      body: user
-    })
+    res.send(user)
   } catch (error) {
     next(error)
   }
@@ -90,11 +74,7 @@ usersController.deleteUser = async (req, res, next) => {
 usersController.getUserById = async (req, res, next) => {
   try {
     const user = await Users.findById(req.userId)
-    res.json({
-      state: 200,
-      message: 'User with token listed',
-      body: user
-    })
+    res.send(user)
   } catch (error) {
     next(error)
   }
