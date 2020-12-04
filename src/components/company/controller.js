@@ -50,7 +50,6 @@ companysController.postCompany = async (req, res, next) => {
 
 companysController.updateCompany = async (req, res, next) => {
   try {
-    const password = await bcrypt.hash(req.body.password, 10)
     const company = {
         name: req.body.name,
         nit: req.body.nit,
