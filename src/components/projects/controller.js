@@ -19,6 +19,15 @@ projectsController.getOneProject = async (req, res, next) => {
   }
 }
 
+projectsController.getCompanyProject = async (req, res, next) => {
+  try {
+    const project = await Projects.find(req.params)
+    res.send(project)
+  } catch (error) {
+    next(error)
+  }
+}
+
 projectsController.postProject = async (req, res, next) => {
   try {
     const project = new Projects({

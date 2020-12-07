@@ -19,6 +19,15 @@ ticketsController.getOneTicket = async (req, res, next) => {
   }
 }
 
+ticketsController.getStorieTicket = async (req, res, next) => {
+  try {
+    const ticket = await Tickets.find(req.params)
+    res.send(ticket)
+  } catch (error) {
+    next(error)
+  }
+}
+
 ticketsController.postTicket = async (req, res, next) => {
   try {
     const ticket = new Tickets({

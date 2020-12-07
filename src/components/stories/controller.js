@@ -19,6 +19,15 @@ storiesController.getOneStorie = async (req, res, next) => {
   }
 }
 
+storiesController.getProjectStorie = async (req, res, next) => {
+  try {
+    const storie = await Stories.find(req.params)
+    res.send(storie)
+  } catch (error) {
+    next(error)
+  }
+}
+
 storiesController.postStorie = async (req, res, next) => {
   try {
     const storie = new Stories({
