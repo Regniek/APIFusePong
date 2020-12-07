@@ -20,6 +20,16 @@ usersController.getOneUser = async (req, res, next) => {
   }
 }
 
+usersController.getEmailUser = async (req, res, next) => {
+  try {
+    const user = await Users.find(req.params)
+    res.send(user)
+  } catch (error) {
+    next(error)
+  }
+}
+
+
 usersController.postUser = async (req, res, next) => {
   try {
     const password = await bcrypt.hash(req.body.password, 10)

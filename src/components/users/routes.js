@@ -6,6 +6,7 @@ require('../../lib/passport')
 
 router.get('/user', users.getUsers)
 router.get('/user/:id', users.getOneUser)
+router.get('/usere/:email', users.getEmailUser)
 router.post('/user', users.postUser)
 router.patch('/user/:id', passport.authenticate('jwt', { session: false }), users.updateUser)
 router.delete('/user/:id', passport.authenticate('jwt', { session: false }), users.deleteUser)
